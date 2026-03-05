@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // const [state, setState] = useState(false);
+        // const toggleState = setState(!state);
+        // const toggleState = setState(prevState => !prevState);
+      const arr = [2, 5, 7, 6];
+      // Algorithm start
+      console.log(arr.length);
+      // O(n)
+      for(let i = 0; i < arr.length; i+= 1) {
+        conosle.log(`${i} ${arr[i]}`)
+      }
+      log2x32 = 5;
+      // О(n^2)
+      const sallaries = [1000, 6000, 2000, 4000, 7000].sort((a, b) => a - b);
+    //   1000 
+    //   6000
+    //   2000
+    //   4000
+    //   7000
+    //   3 + 2 + 1 = 6
+    //   4 + 3 + 2 + 1 = 10
+    // посчитать пространственную и временную сложность нахождения суммы 
+    // всех элементов массива
+    const arr2 = [4, 5, 6];
+    let sum = 0;
+    for(let i = 0; i < arr2.length; i+= 1) {
+        sum += arr2[i];
+    }
+    console.log(sum);
+    3 - 12
+    4 - 16
+    Временная O(n)
+    Пространственная - всегда 2
+
+    let arr3 = [];
+    for(let i = 0; i < arr2.length; i+= 1) {
+        arr3.push(arr2[i]);
+    }
+
+    function fork1(n) {
+        if(n < 5) {
+            console.log("number is < 5");
+        }
+        else {
+            for(let i = 0; i < n; i+=1) {
+                console.log(i);
+            }
+        }
+    }
+    При n < 5 = 2 операции O(2)
+    Пространственная сложность 0
+    O(n)
+    Пространственная сложность 1
+
+    function doubleFor(n) {
+        for(let i = 0; i < n/ 3; i+=1) {
+            for(let j = 1; j <= n; j+=4) {
+                console.log(`i=${i} j=${j}`)
+            } 
+        }
+    }
+    n / 3 * n / 4 = (n * n) / 12
+    Временная сложность O(n^2)
+    Пространственная сложность 1 + n/4
+    </script>
+</body>
+</html>

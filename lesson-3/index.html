@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const company = {
+        name: "TechCorp",
+        founded: 2015,
+        employees: 120,
+        isActive: true,
+        location: "Berlin",
+      };
+      const printConsoleObjKeyValues = (obj) => {
+        for (const key in obj) {
+          console.log(`${key}:${obj[key]}`);
+        }
+      };
+      //   printConsoleObjKeyValues(company);
+
+      const user = {
+        name: "Alice",
+        children: [
+          {
+            name: "Bob",
+            children: [{ name: "Charlie" }],
+          },
+          { name: "David" },
+        ],
+      };
+
+      const printConsoleUserKeyValues = (obj) => {
+        for (const key in obj) {
+          const value = obj[key];
+          if (Array.isArray(value)) {
+            value.forEach((item) => printConsoleKeyValues(item));
+            continue;
+          }
+
+          console.log(`${key}:${value}`);
+        }
+      };
+      //   printConsoleUserKeyValues(user);
+      /*
+      1. Запускается функция printConsoleUserKeyValues
+      2. key = "name", value = "Alice"
+      3. "Alice" не массив.
+      4. Выводим в консоль "name:Alice".
+      5. key = "children", value = массив объектов
+      6. Массив - true.
+      7. Запускаем перебор массив.
+        7.1. Для 0 элемента массив вызываем функцию printConsoleKeyValues.
+        7.2. key = "name", value = "Bob".
+        7.3. "Alice" не массив.
+        7.4. Выводим в консоль "name:Bob".
+        7.5. key = "children", value = массив объектов
+        7.6. Массив - true.
+        7.7. Запускаем перебор массив.
+            7.7.1 Для 0 элемента массив вызываем функцию printConsoleKeyValues.
+            7.7.2. key = "name", value = "Charlie".
+            7.7.3. "Charlie" не массив.
+            7.7.4. Выводим в консоль "name:Charlie".
+            7.7.5. Функция printConsoleKeyValues заканчивает работу, возвращаемся
+            в предыдущую функцию.
+        7.8.
+      */
+
+      function funcIterative(n) {
+        let res = 0;
+        for (let i = 0; i < n; i++) {
+          res = res + i;
+          console.log("res=", res, "; n=", n, "; i=", i);
+        }
+        return res;
+      }
+      //   funcIterative(5);
+
+      function funcRecursive(n) {
+        if (n === 0) {
+          return 0;
+        }
+        let res = n - 1 + funcRecursive(n - 1);
+        console.log("res=", res, "; n=", n);
+        return res;
+      }
+      //   funcRecursive(5); // 4 + 3 + 2 + 1 + 0
+
+      function func_recursive(x, y) {
+        if (x === 0) {
+          return y;
+        } else {
+          const res = func_recursive(x - 1, x + y);
+          console.log(`res=${res}; x=${x}; y=${y}`);
+          return res;
+        }
+      }
+      //   func_recursive(5, 10);
+      function isConsonant(letter) {
+        letter = letter.toUpperCase();
+        if (
+          letter.charCodeAt(0) >= 65 &&
+          letter.charCodeAt(0) <= 90 &&
+          !(
+            letter === "A" ||
+            letter === "E" ||
+            letter === "I" ||
+            letter === "O" ||
+            letter === "U"
+          )
+        ) {
+          return true;
+        }
+        return false;
+      }
+      function countConsonantIter(str) {
+        let count = 0;
+        for (let i = 0; i < str.length; i++) {
+          if (isConsonant(str[i])) {
+            count++;
+          }
+        }
+        return count;
+      }
+      //   console.log(countConsonantIter("Bohdan"));
+      
+      function countConsonantRecursion(str, length) {
+        let res = 0;
+        if (length === 1) {
+          res = isConsonant(str[0]) ? 1 : 0;
+          console.log(`res= ${res}`);
+          return res;
+        }
+        if (isConsonant(str[length - 1])) {
+          res = countConsonantRecursion(str, length - 1) + 1;
+          console.log(`res= ${res}`);
+          return res;
+        } else {
+          res = countConsonantRecursion(str, length - 1);
+          console.log(`res= ${res}`);
+          return res;
+        }
+      }
+      console.log(countConsonantRecursion("Bohdan", 6));
+    </script>
+  </body>
+</html>
