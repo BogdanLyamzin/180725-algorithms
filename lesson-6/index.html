@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="fruit-list"></div>
+    <!-- <ul>
+        <li>Фрукты
+            <ul>
+                <li>Яблоко</li>
+                <li>Апельсин</li>
+            </ul>
+        </li>
+        <li>
+            Овощи
+            <ul>
+                <li>Морковь</li>
+                <li>Капуста
+                    <ul>
+                        <li>Брокколи</li>
+                        <li>Цветная</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul> -->
+    <script>
+      const arr = [8, 3, 1, 0, 10, 2];
+
+      const quickSort = (arr) => {
+        if (arr.length <= 1) {
+          return arr;
+        }
+
+        const pivot = arr[arr.length - 1];
+        return partitionSort(arr.slice(0, -1), pivot);
+      };
+
+      const partitionSort = (arr, pivot) => {
+        console.log(arr)
+        const leftArr = [];
+        const rightArr = [];
+        for (let i = 0; i < arr.length; i += 1) {
+          const value = arr[i];
+          if (value > pivot) {
+            rightArr.push(value);
+          } else {
+            leftArr.push(value);
+          }
+        }
+
+        return [...quickSort(leftArr), pivot, ...quickSort(rightArr)];
+      };
+
+      
+
+      //   const quickSort = (arr) => {
+      //     if (arr.length <= 1) {
+      //       return arr;
+      //     }
+
+      //     const pivot = arr[arr.length - 1];
+      //     const leftArr = [];
+      //     const rightArr = [];
+      //     for (let i = 0; i < arr.length - 1; i += 1) {
+      //       const value = arr[i];
+      //       if (value > pivot) {
+      //         rightArr.push(value);
+      //       } else {
+      //         leftArr.push(value);
+      //       }
+      //     }
+
+      //     return [...quickSort(leftArr), pivot, ...quickSort(rightArr)];
+      //   };
+      console.log(quickSort(arr));
+
+      const listData = [
+        {
+          id: 1,
+          title: "Фрукты",
+          children: [
+            { id: 2, title: "Яблоко" },
+            { id: 3, title: "Апельсин" },
+          ],
+        },
+        {
+          id: 4,
+          title: "Овощи",
+          children: [
+            { id: 5, title: "Морковь" },
+            {
+              id: 6,
+              title: "Капуста",
+              children: [
+                { id: 7, title: "Брокколи" },
+                { id: 8, title: "Цветная" },
+              ],
+            },
+          ],
+        },
+      ];
+
+      const fruitList = document.getElementById("fruit-list");
+
+      //   const renderNestedList = arr => {
+      //     const list = document.createElement("ul");
+      //     const elements = arr.map(({title, children}) => {
+      //         const listElement = document.createElement("li");
+      //         listElement.textContent = title;
+      //         if(Array.isArray(children) && children.length) {
+      //             const nestedList = renderNestedList(children);
+      //             listElement.append(nestedList);
+      //         }
+      //         return listElement;
+      //     });
+
+      //     list.append(...elements);
+      //     return list;
+      //   }
+
+      const renderListItem = ({ title, children }) => {
+        const listElement = document.createElement("li");
+        listElement.textContent = title;
+        if (Array.isArray(children) && children.length) {
+          const nestedList = renderNestedList(children);
+          listElement.append(nestedList);
+        }
+        return listElement;
+      };
+
+      const renderNestedList = (arr) => {
+        const list = document.createElement("ul");
+        const elements = arr.map(renderListItem);
+        list.append(...elements);
+        return list;
+      };
+
+      //   fruitList.append(renderNestedList(listData));
+    </script>
+  </body>
+</html>
